@@ -1,12 +1,8 @@
 """
 03 - Causal DAG + Refutation Tests
-=====================================
+
 A CATE number from script 02 is only trustworthy if the causal assumptions
-behind it are made explicit and stress-tested. This is the piece that turns
-"I ran a causal ML library" into "I understand what makes an estimate
-identifiable and defensible" -- directly the "auditable / trustworthy AI"
-framing NMBU's ad uses, and the "graphical causal models" NorHead lists as
-a preferred skill.
+behind it are made explicit and stress-tested. 
 
 Steps:
 1. Encode the assumed causal DAG (which variables confound, which don't).
