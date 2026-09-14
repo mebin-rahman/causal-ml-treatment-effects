@@ -2,8 +2,7 @@
 02 - NHEFS: Real-World CATE Estimation
 ========================================
 Dataset: NHEFS (NHANES Epidemiologic Follow-up Study), the dataset used
-throughout Hernan & Robins, "Causal Inference: What If" -- the standard
-reference text in modern causal inference.
+throughout Hernan & Robins, "Causal Inference: What If" 
 
 Question: does quitting smoking (treatment, `qsmk`) causally affect weight
 gain (outcome, `wt82_71`, in kg between 1971 and 1982)? This is a classic
@@ -16,8 +15,7 @@ correlation between quitting and weight gain is confounded.
 
 We go beyond the single ATE and ask: does the effect of quitting
 vary by baseline smoking intensity or age (CATE)? For example, who benefits most/
-is most at risk, since treatment effects vary across a population rather
-than being a single number.
+is most at risk, since treatment effects vary across a population.
 """
 import numpy as np
 import pandas as pd
