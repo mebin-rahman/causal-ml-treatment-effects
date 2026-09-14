@@ -1,6 +1,6 @@
 # From Correlation to Causation: Causal Machine Learning for Heterogeneous Treatment Effects
 
-Implementing and validating core causal machine learning methods end to end: meta-learners, causal forests, and formal causal identification, with an emphasis on understanding why each step exists rather than just calling a library function and reporting a number.
+Implementing and validating core causal machine learning methods end to end: meta-learners, causal forests and formal causal identification.
 
 Can causal ML methods reliably estimate heterogeneous treatment effects when ground truth is available, and do they produce defensible, auditable estimates when applied to real observational healthcare data? That's the question this project works through in three stages.
 
@@ -8,7 +8,7 @@ Can causal ML methods reliably estimate heterogeneous treatment effects when gro
 
 Before trusting a treatment-effect estimate on real data, three questions need answering:
 
-1. Does the method work when the right answer is known? This can't be checked directly on real data, since you never observe both potential outcomes for the same person, so I validated the estimators on a semi-synthetic benchmark with known ground-truth treatment effects first.
+1. Does the method work when the right answer is known? This can't be checked directly on real data, since we never observe both potential outcomes for the same person, so I validated the estimators on a semi-synthetic benchmark with known ground-truth treatment effects first.
 2. Does the approach produce sensible estimates on real, confounded healthcare data?
 3. Can the causal assumptions be made explicit, and does the estimate survive robustness checks?
 
