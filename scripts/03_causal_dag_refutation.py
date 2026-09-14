@@ -30,11 +30,6 @@ CONFOUNDERS = [
 TREATMENT = "qsmk"
 OUTCOME = "wt82_71"
 
-# Minimal DAG: every confounder points into BOTH treatment and outcome;
-# treatment points into outcome. No mediators modeled here (kept simple
-# on purpose -- extending this to include mediators, e.g. post-quit
-# exercise change, would be a natural next step and worth flagging as a
-# limitation in the write-up).
 GRAPH = "digraph {"
 for c in CONFOUNDERS:
     GRAPH += f'"{c}" -> "{TREATMENT}"; "{c}" -> "{OUTCOME}"; '
