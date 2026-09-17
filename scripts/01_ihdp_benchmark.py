@@ -9,14 +9,9 @@ IHDP (Infant Health and Development Program) is the standard benchmark in
 causal ML papers (Hill 2011, Shalit et al. 2017, Wager & Athey 2018, etc.)
 because it's a semi-synthetic dataset: real covariates from a real RCT, but
 simulated outcomes with a KNOWN individual treatment effect (tau). This lets
-us score estimators on PEHE (Precision in Estimation of Heterogeneous Effect)
-instead of just eyeballing results.
+us score estimators on PEHE (Precision in Estimation of Heterogeneous Effect).
 
-Why this matters for the application: any registry-based causal ML tool
-(e.g. estimating migraine treatment effects on sick-leave) is unverifiable
-in the wild -- you never observe the counterfactual for a real patient. IHDP
-is how the field builds confidence in an estimator BEFORE deploying it on
-data where ground truth is unknown.
+
 """
 import numpy as np
 import pandas as pd
@@ -65,8 +60,7 @@ def run_benchmark(n_repeats=10):
         tau_hat_x = x_learner.effect(X_te)
 
         # --- Causal Forest: honest splitting, gives valid confidence
-        # intervals, closest to what NorHead/NMBU would want for
-        # trustworthy/auditable estimates ---
+        
         cf = CausalForest(n_estimators=500, random_state=RNG, honest=True)
         cf.fit(X_tr, T_tr, Y_tr)
         tau_hat_cf = cf.predict(X_te).flatten()

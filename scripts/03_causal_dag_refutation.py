@@ -1,12 +1,8 @@
 """
 03 - Causal DAG + Refutation Tests
-=====================================
+
 A CATE number from script 02 is only trustworthy if the causal assumptions
-behind it are made explicit and stress-tested. This is the piece that turns
-"I ran a causal ML library" into "I understand what makes an estimate
-identifiable and defensible" -- directly the "auditable / trustworthy AI"
-framing NMBU's ad uses, and the "graphical causal models" NorHead lists as
-a preferred skill.
+behind it are made explicit and stress-tested. 
 
 Steps:
 1. Encode the assumed causal DAG (which variables confound, which don't).
@@ -34,11 +30,6 @@ CONFOUNDERS = [
 TREATMENT = "qsmk"
 OUTCOME = "wt82_71"
 
-# Minimal DAG: every confounder points into BOTH treatment and outcome;
-# treatment points into outcome. No mediators modeled here (kept simple
-# on purpose -- extending this to include mediators, e.g. post-quit
-# exercise change, would be a natural next step and worth flagging as a
-# limitation in the write-up).
 GRAPH = "digraph {"
 for c in CONFOUNDERS:
     GRAPH += f'"{c}" -> "{TREATMENT}"; "{c}" -> "{OUTCOME}"; '
@@ -64,6 +55,8 @@ if __name__ == "__main__":
         outcome=OUTCOME,
         graph=GRAPH,
     )
+    model.view_model(layout="dot")
+    print("Saved DAG visualization to causal_model.png")
 
     identified_estimand = model.identify_effect(proceed_when_unidentifiable=True)
     print("=== Identified estimand ===")

@@ -2,25 +2,20 @@
 02 - NHEFS: Real-World CATE Estimation
 ========================================
 Dataset: NHEFS (NHANES Epidemiologic Follow-up Study), the dataset used
-throughout Hernan & Robins, "Causal Inference: What If" -- the standard
-reference text in modern causal inference.
+throughout Hernan & Robins, "Causal Inference: What If" 
 
 Question: does quitting smoking (treatment, `qsmk`) causally affect weight
 gain (outcome, `wt82_71`, in kg between 1971 and 1982)? This is a classic
-"treatment decision -> downstream outcome with real confounding" problem --
-structurally the same shape as "does a migraine treatment choice affect
-sick-leave days," just in a domain with public, well-understood data.
+"treatment decision -> downstream outcome with real confounding" problem.
 
 Confounders: age, sex, race, education, baseline weight, smoking intensity/
 years, exercise, physical activity -- healthier/heavier smokers are more
 likely to quit AND more likely to gain weight regardless, so a naive
 correlation between quitting and weight gain is confounded.
 
-We go beyond the textbook's single ATE and ask: does the effect of quitting
-vary by baseline smoking intensity or age (CATE)? -- i.e., who benefits most/
-is most at risk, which is the applied, decision-support framing NorHead/aiD
-care about (treatment effects that vary across a population, not a single
-number).
+We go beyond the single ATE and ask: does the effect of quitting
+vary by baseline smoking intensity or age (CATE)? For example, who benefits most/
+is most at risk, since treatment effects vary across a population.
 """
 import numpy as np
 import pandas as pd
@@ -72,8 +67,8 @@ def estimate_cate(df):
     cf = CausalForest(n_estimators=1000, random_state=RNG, honest=True)
     cf.fit(X, T, Y)
     tau_hat_cf = cf.predict(X).flatten()
-    # 90% confidence interval per unit -- the "auditable" part NMBU's ad
-    # cares about: not just a point estimate, but how confident it is
+    # 90% confidence interval per unit, not just a point estimate
+    
     lb, ub = cf.predict_interval(X, alpha=0.1)
 
     out = df.copy()
